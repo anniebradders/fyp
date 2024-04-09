@@ -1,0 +1,68 @@
+.prediction-result.soft { color: #ff0000; } /* Red for soft */
+.prediction-result.medium { color: #ffff00; } /* Yellow for medium */
+.prediction-result.hard { color: #ffffff; } /* White for hard */
+
+body { padding: 2rem; background-color: #f0f0f0; }
+.container { max-width: 960px; margin: auto; }
+/*.header-image { width: 50%; height: auto; border-radius: 8px; }*/
+.dark-theme { background-color: #121212; color: white; }
+/*.prediction-form { background-color: #202020; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; }
+.submit-btn { background-color: #e10600; color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; }*/
+.prediction-result { padding: 1rem; border-radius: 8px; background-color: #424242; }
+.footer { text-align: center; padding-top: 3rem; }
+.container-fluid {width:100%;margin-right:auto;margin-left:auto;padding-right:var(--spacing);padding-left:var(--spacing)}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+}
+
+.title-class {
+    margin: -25px;
+}
+
+.orbitron-heading {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: xx-large;
+  }
+
+.content-section {
+    display: flex;
+    justify-content: space-between; /* Distribute space between and around content items */
+    align-items: center; /* Align items vertically */
+    padding: 20px;
+    padding-bottom: 5px;
+}
+
+.content-figure, .prediction-form {
+    flex: 1; /* Allows both children to grow and take up equal space */
+    margin: 10px; /* Adds some space between the figure and form */
+}
+
+.header-image {
+    max-width: 100%; /* Ensure the image is responsive and fits its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.prediction-form {
+    background-color: #202020; border-radius: 8px; 
+    display: flex;
+    flex-direction: column; /* Stack form fields vertically */
+}
+
+.submit-btn {
+    margin-top: 10px; /* Add space above the submit button */
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        flex-direction: column; /* Stack figure and form vertically on smaller screens */
+    }
+}
+
+.grid{
+    margin-bottom: 0;
+}

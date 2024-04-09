@@ -1,0 +1,77 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction</title>
+</head>
+<body> 
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field.name != 'field1' %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                </p>
+            {% endif %}
+        {% endfor %}
+        <p>Race Progression: </p>
+        <label for="percentage_slider">{{ form.percentage.label }}</label>
+        <input type="range" name="field1" id="percentage_slider" step="0.01" min="0" max="1" value="{{ form.percentage.value|default_if_none:"0.00" }}">
+        <span id="percentage_value">0.00</span>%  // Display for percentage value
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+        <p>Prediction result: {{ result }}</p>
+    {% endif %}
+
+    <script>
+        const slider = document.getElementById('percentage_slider');
+        const output = document.getElementById('percentage_value');
+        output.innerHTML = slider.value; // Display the default slider value
+
+        // Update the current slider value 
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Tyre Compound Prediction</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'fyp/style.css' %}"> <!-- Link to CSS file -->
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <form method="post" class="prediction-form">
+            {% csrf_token %}
+            {% for field in form %}
+                {% if field.name != 'field1' %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                    </p>
+                {% endif %}
+            {% endfor %}
+            <p>Race Progression: </p>
+            <label for="percentage_slider">{{ form.percentage.label }}</label>
+            <input type="range" name="field1" id="percentage_slider" step="0.01" min="0" max="1" value="{{ form.percentage.value|default_if_none:"0.00" }}">
+            <span id="percentage_value">0.00</span>%  <!-- Display for percentage value -->
+            <button type="submit" class="submit-btn">Predict Tyre Compound</button>
+        </form>
+        {% if result %}
+            <!-- Result Display with Dynamic Class Based on Prediction -->
+            <p class="prediction-result {{result}}">Prediction result: {{ result }}</p>
+        {% endif %}
+    </div>
+    {% load static %}
+    <script src="{% static 'fyp/script.js' %}"></script> <!-- Link to JavaScript file -->
+</body>
+</html>
