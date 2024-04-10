@@ -44,4 +44,4 @@ class PredictionForm(forms.Form):
     field4 = forms.BooleanField(required=False, label='Fufilled second pitstop')
     
     # Dropdown for selecting from 1 to 5
-    field5 = forms.ChoiceField(choices=[(i, str(i)) for i in range(1, 6)], label='Number of avaliable compounds')
+    field5 = forms.ChoiceField(choices=[(i, str(i)) for i in range(2, 4)], label='Number of avaliable compounds')
