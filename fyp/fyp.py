@@ -15,7 +15,7 @@ def convert_input(param1, param2, param3, param4, param5):
     'race_progress': [param1],
     'remaining_pit_stops': [param2],
     'location': [param3],
-    'fulfilled_second_compound': [param4],
+    'change_compound': [param4],
     'number_of_available_compounds': [param5]
     }
 
@@ -29,7 +29,7 @@ def convert_input(param1, param2, param3, param4, param5):
     encoder = load('encoder.joblib')
 
     # Separate categorical and numerical features
-    cat_features = ['remaining_pit_stops', 'location', 'fulfilled_second_compound', 'number_of_available_compounds']
+    cat_features = ['remaining_pit_stops', 'location', 'change_compound', 'number_of_available_compounds']
     num_features = ['race_progress']
 
     # Perform preprocessing on numerical features
@@ -74,7 +74,7 @@ def decode_prediction(user_input):
     decoded_pred = np.concatenate((sample_cat_original.flatten(), sample_num_original.flatten()), axis=0)
 
     # decoded_sample should contain the original values
-    labels = ['Number of remaining pit stops:', 'Location:', 'Fulfilled second compound:', 'Number of available compounds:', 'Race progression:']
+    labels = ['Number of remaining pit stops:', 'Location:', 'change Compound:', 'Number of available compounds:', 'Race progression:']
     print('')
 
     # Display each label with its corresponding data value
