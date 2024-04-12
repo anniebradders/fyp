@@ -12,7 +12,7 @@ class PredictionForm(forms.Form):
         # Dropdown for locations
     model_choices = [
         ('./models/RNN_model.h5', 'RNN'), ('./models/LSTM_model.h5', 'LSTM'), ('./models/ANN_model.h5', 'ANN'),
-        ('./models/CNN_model.h5', 'CNN'), ('./models/RNN_hyper_model.h5', 'RNN Hyper Tuned Model')
+        ('./models/CNN_model.h5', 'CNN'), ('./models/LSTM_hyper_model.h5', 'LSTM Hyper Tuned Model')
     ]
     field6 = forms.ChoiceField(choices=model_choices, label='Select Model')
     
