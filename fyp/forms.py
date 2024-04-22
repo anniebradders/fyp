@@ -1,15 +1,6 @@
 from django import forms
 
 class PredictionForm(forms.Form):
-    #field1 = forms.CharField(label='Race Progress', max_length=100)
-    #field2 = forms.CharField(label='Remaining pit stops', max_length=100)
-    #field3 = forms.CharField(label='Location', max_length=100)
-    #field4 = forms.CharField(label='Fufilled second pitstop', max_length=100)
-    #field5 = forms.CharField(label='Number of avaliable compounds', max_length=100)
-
-        # Slider field for percentage (0.00 to 1.00)
-
-        # Dropdown for locations
     model_choices = [
         ('./models/RNN_model.h5', 'RNN'), ('./models/LSTM_model.h5', 'LSTM'), ('./models/ANN_model.h5', 'ANN'),
         ('./models/CNN_model.h5', 'CNN'), ('./models/LSTM_hyper_model.h5', 'LSTM Hyper Tuned Model')

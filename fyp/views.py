@@ -27,3 +27,12 @@ def prediction_view(request):
     else:
         form = PredictionForm()
     return render(request, './home.html', {'form': form})
+
+def evaluation(request):
+    if request.method == 'POST':
+        form = PredictionForm(request.POST)
+        if form.is_valid():
+            return render(request, './evaluation.html', {'form': form})
+    else:
+        form = PredictionForm()
+    return render(request, './evaluation.html', {'form': form})

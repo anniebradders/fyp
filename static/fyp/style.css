@@ -17,6 +17,11 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    color: #ffffff;
+    text-align: center;
+}
+
 .title-class {
     margin: -25px;
 }
@@ -66,3 +71,5 @@ h1 {
 .grid{
     margin-bottom: 0;
 }
+
+

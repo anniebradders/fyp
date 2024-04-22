@@ -4,6 +4,9 @@ from keras.models import load_model
 from joblib import load
 
 def make_prediction(param1, param2, param3, param4, param5, param6):
+    """Loads chosen model, encodes user input, makes prediction
+    @
+    """
     model_loaded = load_model(param6)
     user_input = convert_input(param1, param2, param3, param4, param5)
     prediction = pred(user_input, model_loaded)
