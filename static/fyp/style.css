@@ -8,7 +8,6 @@ body { padding: 2rem; background-color: #f0f0f0; }
 .dark-theme { background-color: #121212; color: white; }
 /*.prediction-form { background-color: #202020; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; }
 .submit-btn { background-color: #e10600; color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; }*/
-.prediction-result { padding: 1rem; border-radius: 8px; background-color: #424242; }
 .footer { text-align: center; padding-top: 3rem; }
 .container-fluid {width:100%;margin-right:auto;margin-left:auto;padding-right:var(--spacing);padding-left:var(--spacing)}
 
@@ -21,6 +20,30 @@ h2 {
     color: #ffffff;
     text-align: center;
 }
+
+h3 {
+    text-align: center;
+}
+
+.content-box {
+    text-align: center;
+    background-color: #202020;
+    padding: auto;
+    margin: auto;
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul {
+    list-style-type: none;
+    padding: auto; 
+    margin: 0; 
+    text-align: left;
+  }
+
 
 .title-class {
     margin: -25px;
@@ -56,6 +79,12 @@ h2 {
     background-color: #202020; border-radius: 8px; 
     display: flex;
     flex-direction: column; /* Stack form fields vertically */
+    padding: 10px;
+}
+
+.prediction-result { 
+    margin-top: -20px;
+    text-align: center;
 }
 
 .submit-btn {
@@ -71,5 +100,4 @@ h2 {
 .grid{
     margin-bottom: 0;
 }
-
 

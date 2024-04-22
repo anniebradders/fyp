@@ -9,18 +9,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <style>
+        body, html { height: 100%; margin: 0; }
+        canvas { width: 100%; height: 100%; display: block; background: rgba(0, 0, 0, 0); }
+    </style>
 </head>
 <body class="dark-theme">
     <div class="title-class">
         <h1 class="orbitron-heading">F1 Compound Predictor</h1>
         <a href="{% url 'evaluation' %}">Evaluation</a>
     </div>
-    <main class="container">
         <div class="grid">
             <section class="content-section">
-                <figure class="content-figure">              
-                    <img src="{% static 'fyp/mclaren.png' %}" class="header-image"/>
-                </figure>
                 <form method="post" class="prediction-form">
                     {% csrf_token %}
                     {% for field in form %}
@@ -32,18 +32,68 @@
                         {% endif %}
                     {% endfor %}
                     <p>Race Progression: </p>
-                    <label for="percentage_slider">{{ form.percentage.label }}</label>
-                    <input type="range" name="field1" id="percentage_slider" step="0.01" min="0" max="1" value="{{ form.percentage.value|default_if_none:"0.00" }}">
-                    <span id="percentage_value">0.00</span>%  <!-- Display for percentage value -->
+                    <input type="range" name="field1" id="percentage_slider" step="1" min="0" max="100" value="0">
+                    <p><span id="percentage_value">0</span>% </p>
                     <button type="submit" class="submit-btn">Predict Tyre Compound</button>
                 </form>
+                <div id="modelContainer" style="width: 100%; height: 100%;" class="width: 1px; margin: 100px auto;"></div>
             </section>
             {% if result %}
-            <!-- Result Display with Dynamic Class Based on Prediction -->
-            <p class="prediction-result {{result}}">Prediction result: {{ result }}</p>
+            <p class="prediction-result {{result}} orbitron-heading">Prediction result: {{ result }}</p>
             {% endif %}
         </div>
-    </main>
-    <script src="{% static 'fyp/script.js' %}"></script>
+        <p style="font-size: 10px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/f1-2021-mclaren-mcl35m-967ecec37468412083c40c62b3d7234d?utm_medium=embed&utm_campaign=share-popup&utm_content=967ecec37468412083c40c62b3d7234d" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> F1 2021 McLaren MCL35M </a> by <a href="https://sketchfab.com/excalibur?utm_medium=embed&utm_campaign=share-popup&utm_content=967ecec37468412083c40c62b3d7234d" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Excalibur </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=967ecec37468412083c40c62b3d7234d" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.5/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.5/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.5/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        let scene, camera, renderer, model, controls;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 0, 5);
+
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // Enable alpha and antialias for better quality
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(document.getElementById('modelContainer').clientWidth, window.innerHeight * 0.8);
+            document.getElementById('modelContainer').appendChild(renderer.domElement);
+
+            const loader = new THREE.GLTFLoader();
+            loader.load('static/fyp/f1_2021_mclaren_mcl35m.glb', function (gltf) {
+                model = gltf.scene;
+                model.position.set(0, 0, 0); // Center the model
+                scene.add(model);
+            });
+
+            const ambientLight = new THREE.AmbientLight(0x404040, 2); // soft white light
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 4);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true; // Smoother control
+            controls.dampingFactor = 0.25;
+            controls.screenSpacePanning = false;
+            controls.autoRotate = true; 
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update(); 
+            renderer.render(scene, camera);
+        }
+
+        init();
+
+        // Range slider interaction
+        document.getElementById('percentage_slider').addEventListener('input', function() {
+            document.getElementById('percentage_value').innerText = this.value;
+        });
+    </script>
 </body>
 </html>

@@ -14,6 +14,8 @@ def make_prediction(param1, param2, param3, param4, param5, param6):
 
 def convert_input(param1, param2, param3, param4, param5):
 
+    param1 = param1 *0.01;
+
     data = {
     'race_progress': [param1],
     'remaining_pit_stops': [param2],
