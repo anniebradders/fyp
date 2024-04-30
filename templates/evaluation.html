@@ -13,7 +13,7 @@
 <body class="dark-theme">
     <div class="title-class">
         <h1 class="orbitron-heading">Evaluation</h1>
-        <a href="{% url 'fyp' %}">Compound Predictor</a>
+        <a href="{% url 'fyp' %}" class="orbitron-heading" style="font-size: large; margin-left: 2%;">Compound Predictor</a>
     </div>
     <div class="container">
         <div class="content-box">
@@ -38,7 +38,7 @@
             <br>
         </div>
         <div class="content-box">
-            <h2>Input Features</h2>
+            <h2 class="orbitron-heading">Input Features</h2>
             <p>
                 Our models consider a variety of input features to predict the best tyre compound:
                 <br><br>
@@ -58,7 +58,7 @@
             </ul>
         </div>
         <div class="content-box">
-            <h2>Performance Comparison and Model Selection</h2>
+            <h2 class="orbitron-heading">Performance Comparison and Model Selection</h2>
             <p>Our platform has deployed the following models with the corresponding accuracies:</p>
             <table>
                 <thead>
@@ -129,7 +129,7 @@
             <p>The choice to hyper-tune the LSTM model over the RNN was informed by the LSTM's superior recall and F1 score. In the context of Formula 1, where the cost of false negatives (incorrectly predicting that a tyre compound will perform adequately when it won't) can be as critical as false positives, the balance achieved by the LSTM model is invaluable.</p>
         </div>
         <div class="content-box">
-            <h2>Comparing confusion matrices</h2>
+            <h2 class="orbitron-heading">Comparing confusion matrices</h2>
             <p>When comparing confusion matrices for the different neural network models, we are interested in how well each model predicts the correct tyre compound, which in Formula 1 is a critical decision. Let’s break down each model’s performance.</p>
             <h3>ANN</h3>
             <img src="{% static 'fyp/ANN.png' %}" alt="ANN Confusion Matrix" class="confusion">
@@ -167,7 +167,7 @@
             </p>
         </div>
         <div class="content-box"> 
-            <h2>Model Comparsion</h2>
+            <h2 class="orbitron-heading">Model Comparsion</h2>
             <p>Upon comparing the confusion matrices, we observe that:
             <br><br>The hyper-tuned LSTM model outperforms the other models in terms of true positives for hard and medium compounds, and it is on par for soft compounds. This model also shows fewer false negatives for hard and medium compounds, suggesting it is the best at not missing opportunities to use these compounds effectively.
             <br><br>The RNN model shows the next best performance for hard compounds, which could make it useful in situations where hard tyres are the optimal choice.

@@ -5,16 +5,24 @@ from joblib import load
 
 def make_prediction(param1, param2, param3, param4, param5, param6):
     """Loads chosen model, encodes user input, makes prediction
-    @
+    @INPUT: race progression, remaining pit stops, location, change compound, number of available compounds, model selection
+    @OUTPUT: compound prediction
     """
+    # Loads chosen model
     model_loaded = load_model(param6)
+    # Converts user input from string to numerical values
     user_input = convert_input(param1, param2, param3, param4, param5)
+    #decodes the output of the model prediction
     prediction = pred(user_input, model_loaded)
     return prediction
 
 def convert_input(param1, param2, param3, param4, param5):
-
-    param1 = param1 *0.01;
+    """Encodes and Scales categorical and numerical user input data
+    @INPUT: race progression, remaining pit stops, location, change compound, number of available compounds
+    @OUTPUT: encoded array of user input
+    """
+    # Converts the race progress value to a decimal representing percentage value
+    param1 = param1 *0.01
 
     data = {
     'race_progress': [param1],
@@ -48,6 +56,23 @@ def convert_input(param1, param2, param3, param4, param5):
 
     return user_input_processed
 
+def pred(user_input, model_loaded):
+    """Uses model to predict tyre compound using user input
+    @INPUT: encoded/scaled user input, chosen model
+    @OUTPUT: compound prediction
+    """
+
+    label_encoder = load('label_encoder.joblib')
+
+    # Make a prediction
+    predicted_compound_encoded = model_loaded.predict(user_input)
+    predicted_compound = np.argmax(predicted_compound_encoded, axis=1)
+
+   
+    predicted_compound_label = label_encoder.inverse_transform(predicted_compound)
+    predicted_compound_label = predicted_compound_label[0]
+    return predicted_compound_label
+
 def decode_prediction(user_input):
     # Load the saved models
     scaler = load('./scaler.joblib')
@@ -71,14 +96,14 @@ def decode_prediction(user_input):
     sample_num_original = scaler.inverse_transform(sample_num)
 
     # Inverse transform the categorical part
-    # We need to reshape the sample_encoded_cat to match the encoder's expected shape
+    # Reshape the sample_encoded_cat to match the encoder's expected shape
     sample_encoded_cat = sample_encoded_cat.reshape(1, -1)
     sample_cat_original = encoder.inverse_transform(sample_encoded_cat)
 
     # Combine the decoded numerical and categorical parts
     decoded_pred = np.concatenate((sample_cat_original.flatten(), sample_num_original.flatten()), axis=0)
 
-    # decoded_sample should contain the original values
+    
     labels = ['Number of remaining pit stops:', 'Location:', 'change Compound:', 'Number of available compounds:', 'Race progression:']
     print('')
 
@@ -88,16 +113,5 @@ def decode_prediction(user_input):
 
     return decoded_pred
 
-def pred(user_input, model_loaded):
 
-    label_encoder = load('label_encoder.joblib')
-
-    # Make a prediction
-    predicted_compound_encoded = model_loaded.predict(user_input)
-    predicted_compound = np.argmax(predicted_compound_encoded, axis=1)
-
-    # Assuming label_encoder is loaded or available from the training phase
-    predicted_compound_label = label_encoder.inverse_transform(predicted_compound)
-    predicted_compound_label = predicted_compound_label[0]
-    return predicted_compound_label
 

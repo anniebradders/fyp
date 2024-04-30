@@ -55,6 +55,8 @@ ul {
     font-weight: 600;
     font-style: SemiBold;
     font-size: xx-large;
+    text-decoration: none; 
+    color: #f0f0f0;
   }
 
 .content-section {
