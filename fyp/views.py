@@ -5,7 +5,6 @@ from .forms import PredictionForm
 
 def fyp(request):
     # Extract user parameters from request
-    # For simplicity, let's assume parameters are passed as query parameters
     param1 = request.GET.get('param1')
     param2 = request.GET.get('param2')
     
